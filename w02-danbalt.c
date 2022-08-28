@@ -15,7 +15,9 @@ int MinDistance(int A[], int n);
 // swap function for selection sort
 void swap(int a[], int b[]);
 // selection sort algorithm
-void selection_sort(int arr[], int n);
+int partition(int arr[], int l, int h);
+
+void quickSort(int arr[], int l, int h);
 
 // main function
 int main(int argc, char *argv[])
@@ -23,13 +25,13 @@ int main(int argc, char *argv[])
    int values[argc];
    int i;
    // convert char* argv[] data from a strings to ints
-   for(i = 1; i < argc; i++)
+   for (i = 1; i < argc; i++)
    {
       // conversion is working correctly
       values[i - 1] = atoi(argv[i]);
    }
    // Sort data
-   selection_sort(values, argc);
+   quickSort(values, 0, argc);
    // call MinDist and store results in dmin
    int dmin = MinDistance(values, argc);
    printf("%d\n", dmin);
@@ -43,12 +45,12 @@ int MinDistance(int A[], int n)
    int dmin = INT_MAX;
    int i, j;
 
-   for(i = 0; i < (n - 2); i++)
+   for (i = 0; i < (n - 2); i++)
    {
-      for(j = i + 1; j < (n - 1); j++)
+      for (j = i + 1; j < (n - 1); j++)
       {
          int distance = abs(A[i] - A[j]);
-         if(distance < dmin)
+         if (distance < dmin)
          {
             dmin = distance;
          }
@@ -64,21 +66,32 @@ void swap(int a[], int b[])
    *a = *b;
    *b = temp;
 }
-// selection sort
-void selection_sort(int arr[], int n)
+// partition the array
+int partition(int arr[], int l, int h)
 {
-   int i, j, min_index;
+   int pivot = arr[h]; // pivot
+   int i = (l - 1);    // Index of smaller element and indicates the right position of pivot found so far
 
-   for (i = 0; i < (n -1); i++)
+   for (int j = l; j <= h - 1; j++)
    {
-      min_index = i;
-      for(j = (i + 1); j < n; j++)
+      // If current element is smaller than the pivot
+      if (arr[j] < pivot)
       {
-         if(arr[j] < arr[min_index])
-         {
-            min_index = j;
-         }
-         swap(&arr[min_index], &arr[i]);
+         i++; // increment index of smaller element
+         swap(&arr[i], &arr[j]);
       }
+   }
+   swap(&arr[i + 1], &arr[h]);
+   return (i + 1);
+}
+// quick sort
+void quickSort(int arr[], int l, int h)
+{
+   if (l < h)
+   {
+      int index = partition(arr, l, h);
+
+      quickSort(arr, l, index - 1);
+      quickSort(arr, index + 1, h);
    }
 }

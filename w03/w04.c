@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
          k++;
       }
    }
-
+   // print intial matrix
    printMatrix(n, matrix);
    gaussianElim(n, matrix);
 
@@ -44,12 +44,12 @@ void gaussianElim(int n, float A[n][n+1])
 {
    int i, j, k;
    float temp;
-   for (i = 0; i < n-2; i++)
+   for (i = 0; i < n; i++)
    {
-      for (j = i + 1; j < n - 1; j++)
+      for (j = i + 1; j < n + 1; j++)
       {
          temp = A[j][i];
-         for (k = i; k < n; k++)
+         for (k = i; k < n + 1; k++)
          {
             A[j][k] =A[j][k] - (A[i][k] * temp / A[i][i]);
          }

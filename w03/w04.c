@@ -22,15 +22,15 @@ int main(int argc, char *argv[])
 
    float matrix[n][n+1];
 
-   for(i = 2; i < n; i++)
+   for(i = 2; i < argc; i++)
    {
-      for(j = 0; j < n + 1; j++ )
+      for(j = 0; j < argc + 1; j++ )
       {
          // argv starts at 2 of n arguments
-         matrix[i][j] = atof(argv[i]);
+         matrix[i - 1][j] = atof(argv[i]);
       }
    }
-
+   printMatrix(n, matrix);
 
 
    // intialize float matrix
@@ -68,7 +68,7 @@ void printMatrix(int n, float A[n][n+1])
    {
       for (j = 0; j < n + 1; j++)
       {
-         printf("%.2f", A[i][j]);
+         printf("%f ", A[i][j]);
       }
       printf("\n");
    }

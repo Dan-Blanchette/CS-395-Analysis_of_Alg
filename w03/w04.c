@@ -13,17 +13,29 @@ void gaussianElim(int n, float A[n][n + 1]);
 void printMatrix(int n, float A[n][n+1]);
 int main(int argc, char *argv[])
 {
-   int i, n;
+   int i, j, n;
    int argConv[argc];
-   for(i = 0; i < argc; i++)
-   {
-      argConv[i - 1] = atoi(argv[i]);
-   }
+
+   argConv[0] = atoi(argv[1]);
    // n <- {Num Rows For the Matrix = Argv[0]}
    n = argConv[0];
-   // intialize float matrix
+
    float matrix[n][n+1];
-   gaussianElim(n, matrix);
+
+   for(i = 2; i < n; i++)
+   {
+      for(j = 0; j < n + 1; j++ )
+      {
+         // argv starts at 2 of n arguments
+         matrix[i][j] = atof(argv[i]);
+      }
+   }
+
+
+
+   // intialize float matrix
+   //float matrix[n][n+1];
+   //gaussianElim(n, matrix);
 
    return 0;
 }
@@ -41,7 +53,7 @@ void gaussianElim(int n, float A[n][n+1])
          temp = A[j][i];
          for (k = i; k < n; k++)
          {
-            A[j][k] = (A[j][k] - A[i][k]) * temp/A[i][i];
+            A[j][k] = (A[j][k] - A[i][k]) * temp / A[i][i];
          }
       }
    }

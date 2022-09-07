@@ -13,29 +13,27 @@ void gaussianElim(int n, float A[n][n + 1]);
 void printMatrix(int n, float A[n][n+1]);
 int main(int argc, char *argv[])
 {
-   int i, j, n;
-   int argConv[argc];
+   int i, j, k, n;
 
-   argConv[0] = atoi(argv[1]);
-   // n <- {Num Rows For the Matrix = Argv[0]}
-   n = argConv[0];
+   n = atoi(argv[1]);
+   // n = Num Rows For the Matrix = Argv[0]
 
-   float matrix[n][n+1];
+   float matrix[n][n + 1];
 
-   for(i = 2; i < argc; i++)
+   k = 2;
+
+   for(i = 0; i < n; i++)
    {
-      for(j = 0; j < argc + 1; j++ )
+      for(j = 0; j < n + 1; j++ )
       {
          // argv starts at 2 of n arguments
-         matrix[i - 1][j] = atof(argv[i]);
+         matrix[i][j] = atof(argv[k]);
+         k++;
       }
    }
+
    printMatrix(n, matrix);
-
-
-   // intialize float matrix
-   //float matrix[n][n+1];
-   //gaussianElim(n, matrix);
+   gaussianElim(n, matrix);
 
    return 0;
 }
@@ -53,9 +51,10 @@ void gaussianElim(int n, float A[n][n+1])
          temp = A[j][i];
          for (k = i; k < n; k++)
          {
-            A[j][k] = (A[j][k] - A[i][k]) * temp / A[i][i];
+            A[j][k] =A[j][k] - (A[i][k] * temp / A[i][i]);
          }
       }
+      printMatrix(n, A);
    }
 }
 
@@ -68,8 +67,9 @@ void printMatrix(int n, float A[n][n+1])
    {
       for (j = 0; j < n + 1; j++)
       {
-         printf("%f ", A[i][j]);
+         printf("%.2f ", A[i][j]);
       }
       printf("\n");
    }
+   printf("\n");
 }

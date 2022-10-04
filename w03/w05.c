@@ -10,8 +10,6 @@
 
 void towerOfHanoi(int n, char from_post, char to_post, char neu_post);
 
-
-
 int main(int argc, char *argv[])
 {
    int disks, i;

@@ -16,13 +16,13 @@ int main(int argc, char *argv[])
    int disks, i;
    int convArgs[argc];
    // exception check for insufficient args passed
-   // if(argc <= 1)
-   // {
-   //    printf("Error insufficient arguments entered\n FORMAT: ./a.out {INT}\n");
-   //    printf("The Program will now exit\n");
-   //    exit(1);
-   // }
-   // convert the commandline arguments from ascii to int
+   if(argc <= 1)
+   {
+      printf("Error insufficient arguments entered\n FORMAT: ./a.out {INT}\n");
+      printf("The Program will now exit\n");
+      exit(1);
+   }
+   // convert the command line arguments from ascii to int
    for (i = 0; i < argc; i++)
    {
       convArgs[i - 1] = atoi(argv[i]);

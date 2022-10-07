@@ -3,6 +3,7 @@
  *
  * This program will perform selection sort on a
  * data set.
+ * Reference:Got Tutoring from James Lasso
  *********************************************/
 
 #include <stdio.h>
@@ -10,59 +11,69 @@
 
 void insertionSort(int *arr, int size);
 
-void printArr(int *arr, int size);
+void printArr(int *arr, int size, int partition);
 
 int main(int argc, char *argv[])
 {
-   int intArr[argc];
-   int i;
+   int num = argc - 1, i;
+   int intArr[num];
    // convert array data from ascii to integer
-   for(i = 0; i < argc - 1; i++)
+   for(i = 0; i < num; i++)
    {
-      intArr[i - 1] = atoi(argv[i]);
+      intArr[i] = atoi(argv[i + 1]);
    }
-   // print unsorted array
-   printArr(intArr, argc);
-   printf("\n");
+
    // sort the data
-   insertionSort(intArr, argc);
-   // print results
-   printArr(intArr, argc);
-   printf("\n");
+   insertionSort(intArr, num);
 
    return 0;
 }
 
-/* This function will perform insertion sort.
- The array is partitioned and the element to the left is
- compared with the other elements to the right side of the partition
- once a value is found to be less than the partition, the value is inserted
- and the remaining values are moved to the right of the swapped value.
-*/
+// This function will perform insertion sort.
+// The array is partitioned and the element to the left is
+// compared with the other elements to the right side of the partition
+// once a value is found to be less than the partition, the value is inserted
+// and the remaining values are moved to the right of the swapped value.
 void insertionSort(int *arr, int size)
 {
    int i, j, v;
 
-   for(i = 0; i < size -1; i++)
+   for(i = 1; i < size; i++)
    {
+      printArr(arr, size, i);
+      
       v = arr[i];
       j = i - 1;
+
       while (j >= 0 && arr[j] > v)
       {
          arr[j + 1] = arr[j];
-         j = j - 1;
+         j--;
       }
-      arr[j +1] = v;
+      arr[j + 1] = v;
    }
-   printArr(arr, size);
+
+   int k;
+
+   for(k = 0; k < size; k++)
+   {
+      printf("%d ", arr[k]);
+   }
+
+   printf("| \n");
 }
 
-void printArr(int *arr, int size)
+// prints array
+void printArr(int *arr, int size, int partition)
 {
    int i;
-
-   for(i = 0; i < size - 1; i++)
+   for(i = 0; i < size; i++)
    {
+      if (i == partition)
+      {
+         printf("| ");
+      }
       printf("%d ", arr[i]);
    }
+   printf("\n");
 }

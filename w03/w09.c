@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+// prototypes
 void selectionSort(int *array, int size);
 
 void printArr(int *arr, int size);

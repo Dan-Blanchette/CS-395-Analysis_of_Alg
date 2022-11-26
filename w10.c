@@ -32,7 +32,9 @@ int main(int argc, char *argv[])
    for (i = 0; i < num; i++)
    {
       data[i] = atoi(argv[i + 1]);
+      printf("%d ", data[i]);
    }
+   printf("\n");
    quickSort(data, 0, num - 1, num);
    printSubArrays(data, 0 ,num - 1, num);
 
